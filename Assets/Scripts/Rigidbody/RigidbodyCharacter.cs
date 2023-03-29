@@ -5,7 +5,7 @@ using UnityEngine;
 public class RigidbodyCharacter : MonoBehaviour
 {
 	[SerializeField] float speed = 5;
-	[SerializeField] float turnRate = 180;
+	[SerializeField] float turnRate = 15;
 	[SerializeField] float jump = 5;
 	[SerializeField] bool isRelative = false;
 
@@ -39,15 +39,16 @@ public class RigidbodyCharacter : MonoBehaviour
 		// movement
 		direction = Vector3.zero;
 		direction.z = Input.GetAxis("Vertical");
+		direction.x = Input.GetAxis("Horizontal");
 
 		rotate = Vector3.zero;
-		rotate.y = Input.GetAxis("Horizontal");
+		//rotate.y = Input.GetAxis("Horizontal");
 
 
 		// jump
 		if (Input.GetButtonDown("Jump"))
 		{
-			// <jump force>	
+			rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
 		}
 	}
 
@@ -55,11 +56,13 @@ public class RigidbodyCharacter : MonoBehaviour
 	{
 		if (isRelative)
 		{
-			// <force / torque>
+			rb.AddRelativeForce(direction * speed);
+			rb.AddRelativeTorque(rotate * turnRate * Time.deltaTime);
 		}
 		else
 		{
-			// <force / torque>
+			rb.AddForce(direction * speed);
+			rb.AddTorque(rotate * turnRate * Time.deltaTime);
 		}
 	}
 }
