@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RigidbodyCharacter : MonoBehaviour
 {
-	[SerializeField] float speed = 5;
+	[SerializeField] float speed = 20;
 	[SerializeField] float turnRate = 15;
 	[SerializeField] float jump = 5;
 	[SerializeField] bool isRelative = false;
@@ -39,10 +39,10 @@ public class RigidbodyCharacter : MonoBehaviour
 		// movement
 		direction = Vector3.zero;
 		direction.z = Input.GetAxis("Vertical");
-		direction.x = Input.GetAxis("Horizontal");
+		//direction.x = Input.GetAxis("Horizontal");
 
 		rotate = Vector3.zero;
-		//rotate.y = Input.GetAxis("Horizontal");
+		rotate.y = Input.GetAxis("Horizontal");
 
 
 		// jump
